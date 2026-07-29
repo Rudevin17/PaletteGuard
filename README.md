@@ -6,7 +6,7 @@
 
 [![CI](https://github.com/Rudevin17/PaletteGuard/actions/workflows/ci.yml/badge.svg)](https://github.com/Rudevin17/PaletteGuard/actions/workflows/ci.yml)
 [![npm](https://img.shields.io/npm/v/paletteguard)](https://www.npmjs.com/package/paletteguard)
-[![license](https://img.shields.io/npm/l/paletteguard)](LICENSE)
+[![license](https://img.shields.io/github/license/Rudevin17/PaletteGuard)](LICENSE)
 [![node](https://img.shields.io/node/v/paletteguard)](package.json)
 
 </div>
