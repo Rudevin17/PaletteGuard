@@ -30,6 +30,26 @@ $ npx paletteguard chart-colors.json
 
 Exit code `1`. The build stops.
 
+## This is not a hypothetical
+
+I pointed it at the default palettes shipped by the major charting libraries.
+**Every one of them has pairs colourblind readers cannot reliably distinguish.**
+
+| Palette | Breaks at |
+|---|---|
+| d3 `schemeCategory10` | **3 series** |
+| Chart.js defaults | **4 series** |
+| d3 `schemeTableau10` | **5 series** |
+| d3 `schemeObservable10` | **5 series** |
+
+Three bars on a chart is enough to hit it with d3's default scheme. Try it:
+
+```bash
+echo '["#1f77b4","#ff7f0e","#2ca02c"]' | npx paletteguard
+```
+
+**[Full audit, with controls and limitations →](docs/audit.md)**
+
 ## Why this exists
 
 I built an app, cared about accessibility, did the contrast maths, and shipped a
