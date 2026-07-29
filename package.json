@@ -15,6 +15,15 @@
     "ci"
   ],
   "license": "MIT",
+  "author": "Rudevin Cosejo",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rudevin17/paletteguard.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Rudevin17/paletteguard/issues"
+  },
+  "homepage": "https://github.com/Rudevin17/paletteguard#readme",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -25,10 +34,12 @@
     }
   },
   "bin": {
-    "paletteguard": "./dist/cli.js"
+    "paletteguard": "dist/cli.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "docs",
+    "examples"
   ],
   "engines": {
     "node": ">=18"

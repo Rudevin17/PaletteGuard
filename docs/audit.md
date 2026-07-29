@@ -30,13 +30,20 @@ large share of the dataviz ecosystem. **Three bars on a chart is enough.**
 Distances are CIEDE2000 between colours *as simulated under each condition*.
 Higher is easier to tell apart.
 
-| Palette | n | fail | warn | Worst pair |
+Each pair is checked under three conditions, so one bad pair can produce up to
+three findings. **Distinct failing pairs** is the honest number; it is given
+alongside the total so nothing is inflated.
+
+| Palette | n | Failing pairs | of total pairs | Worst pair |
 |---|---|---|---|---|
-| Wong (reference) | 8 | **0** | **0** | 12.19 (deuteranopia) |
-| d3 `schemeCategory10` | 10 | 9 | 7 | **2.84** (protanopia) |
-| d3 `schemeTableau10` | 10 | **14** | 5 | **1.12** (protanopia) |
-| d3 `schemeObservable10` | 10 | 10 | 6 | **3.84** (deuteranopia) |
-| Chart.js defaults | 7 | 3 | 4 | **3.05** (deuteranopia) |
+| Wong (reference) | 8 | **0** | 28 | 12.19 (deuteranopia) |
+| d3 `schemeCategory10` | 10 | **8** | 45 | **2.84** (protanopia) |
+| d3 `schemeTableau10` | 10 | **12** | 45 | **1.12** (protanopia) |
+| d3 `schemeObservable10` | 10 | **9** | 45 | **3.84** (deuteranopia) |
+| Chart.js defaults | 7 | **3** | 21 | **3.05** (deuteranopia) |
+
+So roughly **a quarter of all colour pairs** in `schemeTableau10` are ones a
+colourblind reader cannot reliably separate.
 
 The single closest pair found anywhere: **`schemeTableau10` `#ff9da7` against
 `#bab0ab`, ΔE 1.12 under protanopia.** They simulate to `#aeaea7` and `#b2b2ab`.
@@ -77,7 +84,7 @@ reasonable and the ordering does not change.
 Also fair. Truncating everything to its first 8, so every palette is judged on
 the same 28 pairs:
 
-| Palette | fail | warn | Min distance |
+| Palette | fail findings | warn | Min distance |
 |---|---|---|---|
 | Wong | **0** | **0** | 12.19 |
 | `schemeCategory10` | 6 | 5 | 2.84 |
@@ -86,6 +93,24 @@ the same 28 pairs:
 | Chart.js (7 colours) | 3 | 4 | 3.05 |
 
 Unchanged. It is not a size artefact.
+
+### "Wong is a CVD-optimised palette — that is an unfair bar"
+
+**This one I cannot fully rebut, and it is the strongest objection here.**
+
+Wong was designed for scientific figures where distinguishability outranks
+everything. `schemeTableau10` and friends balance distinguishability against
+aesthetics, brand fit and legibility for normal vision. Holding the second group
+to the first group's standard is a **value judgement, not a measurement**, and
+the word "fail" in this document carries that judgement.
+
+What survives regardless of where the bar sits: a pair at **ΔE 1.12** is not
+marginally short of a strict standard, it is the same colour. The same goes for
+red against green at 2.26. Those are bad under any threshold anyone would defend.
+
+Read the strict verdicts as *"this palette is not CVD-safe by the standard of a
+palette built to be CVD-safe"* — which is true, useful, and narrower than
+"this palette is bad".
 
 ### "Maybe these are marginal failures"
 
