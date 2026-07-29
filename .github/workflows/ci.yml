@@ -6,16 +6,16 @@ on:
   pull_request:
 
 jobs:
+  # Development toolchain. Vitest 4 requires Node 20+, so this cannot run on 18
+  # — but nothing here ships to a consumer, so that is a constraint on
+  # contributors rather than on the package.
   test:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        # package.json claims engines.node >= 18. This matrix is what makes that
-        # a verified statement rather than an assumption — if the floor breaks,
-        # raise the floor, do not quietly drop the row.
-        node: [18, 20, 22, 24]
-    name: node ${{ matrix.node }}
+        node: [20, 22, 24]
+    name: test / node ${{ matrix.node }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -27,9 +27,9 @@ jobs:
       - run: npm test
       - run: npm run build
 
-      # The tool checking itself: the reference palette must pass, and the
-      # known-bad fixture must fail. A green CI run where these two agree is
-      # the only real proof the thresholds still mean anything.
+      # The tool checking itself: the reference palette must pass and the
+      # known-bad fixture must fail. A green run where those two disagree would
+      # mean the thresholds have stopped meaning anything.
       - name: reference palette passes
         run: node dist/cli.js examples/wong.json --no-color
 
@@ -39,3 +39,77 @@ jobs:
             echo "expected a non-zero exit for the known-bad palette"
             exit 1
           fi
+
+  pack:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm pack
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tarball
+          path: paletteguard-*.tgz
+
+  # What actually verifies engines.node. Installs the packed tarball with only
+  # production dependencies, exactly as a consumer would, and runs the binary.
+  #
+  # Installing the real tarball rather than the working tree is deliberate: the
+  # bin field was once written in a form npm strips on publish, which every
+  # source-tree test passed straight through.
+  runtime:
+    runs-on: ubuntu-latest
+    needs: pack
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [18, 20, 22, 24]
+    name: runtime / node ${{ matrix.node }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: tarball
+
+      - name: install as a consumer would
+        run: |
+          mkdir -p /tmp/consumer && cd /tmp/consumer
+          npm init -y > /dev/null
+          npm install --omit=dev "$GITHUB_WORKSPACE"/paletteguard-*.tgz
+
+      - name: the binary exists and runs
+        run: cd /tmp/consumer && npx paletteguard --thresholds
+
+      - name: reference palette passes
+        run: cd /tmp/consumer && npx paletteguard node_modules/paletteguard/examples/wong.json --no-color
+
+      - name: known-bad palette fails
+        run: |
+          cd /tmp/consumer
+          if npx paletteguard node_modules/paletteguard/examples/rudesync.json --no-color; then
+            echo "expected a non-zero exit for the known-bad palette"
+            exit 1
+          fi
+
+      - name: importable as a library
+        run: |
+          cd /tmp/consumer
+          cat > t.mjs <<'EOF'
+          import { checkPalette } from "paletteguard";
+          const r = checkPalette([
+            { name: "a", hex: "#3ddc84" },
+            { name: "b", hex: "#ff6961" },
+          ]);
+          if (r.verdict !== "fail") throw new Error("expected fail, got " + r.verdict);
+          console.log("library ok:", r.verdict, r.findings[0].distance.toFixed(2));
+          EOF
+          node t.mjs

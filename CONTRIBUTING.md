@@ -5,11 +5,19 @@ the most useful thing to know up front is what it will and will not become.
 
 ## Setup
 
+**Development needs Node 20 or newer** — Vitest 4 requires it.
+
+The published package supports **Node 18+**, which is a separate claim: nothing
+in the dev toolchain ships to a consumer. CI enforces both, and the split is
+deliberate. The `runtime` job installs the packed tarball with
+`--omit=dev` and runs the binary on 18, 20, 22 and 24; the `test` job runs the
+toolchain on 20+.
+
 ```bash
 npm install
 npm run check     # typecheck + tests
 npm run build
-node scripts/make-demo.mjs   # regenerates docs/demo.svg
+npm run demo      # regenerates docs/demo.svg
 ```
 
 ## The two fixtures that define correctness
