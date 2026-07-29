@@ -1,0 +1,51 @@
+{
+  "name": "paletteguard",
+  "version": "0.1.0",
+  "description": "Find chart colours your colourblind users can't tell apart. Runs in CI.",
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "colorblind",
+    "color-blindness",
+    "color-vision-deficiency",
+    "palette",
+    "chart",
+    "dataviz",
+    "cli",
+    "ci"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "paletteguard": "./dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "check": "tsc --noEmit && vitest run"
+  },
+  "dependencies": {
+    "@bjornlu/colorblind": "^1.0.3",
+    "culori": "^4.0.2"
+  },
+  "devDependencies": {
+    "@types/culori": "^4.0.1",
+    "@types/node": "^26.1.2",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
+  }
+}

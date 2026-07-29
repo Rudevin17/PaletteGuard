@@ -1,0 +1,33 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - run: npm test
+      - run: npm run build
+
+      # The tool checking itself: the reference palette must pass, and the
+      # known-bad fixture must fail. A green CI run where these two agree is
+      # the only real proof the thresholds still mean anything.
+      - name: reference palette passes
+        run: node dist/cli.js examples/wong.json --no-color
+
+      - name: known-bad palette fails
+        run: |
+          if node dist/cli.js examples/rudesync.json --no-color; then
+            echo "expected a non-zero exit for the known-bad palette"
+            exit 1
+          fi
