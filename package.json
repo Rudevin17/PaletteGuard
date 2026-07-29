@@ -39,7 +39,8 @@
   "files": [
     "dist",
     "docs",
-    "examples"
+    "examples",
+    "CHANGELOG.md"
   ],
   "engines": {
     "node": ">=18"
@@ -47,7 +48,9 @@
   "scripts": {
     "build": "tsc",
     "test": "vitest run",
-    "check": "tsc --noEmit && vitest run"
+    "check": "tsc --noEmit && vitest run",
+    "demo": "node scripts/make-demo.mjs",
+    "prepublishOnly": "npm run check && npm run build"
   },
   "dependencies": {
     "@bjornlu/colorblind": "^1.0.3",

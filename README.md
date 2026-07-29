@@ -30,6 +30,8 @@ $ npx paletteguard chart-colors.json
 
 Exit code `1`. The build stops.
 
+![The same three-series chart shown twice — as normal vision sees it, and as a reader with protanopia does, where two of the three lines become nearly the same colour](docs/demo.svg)
+
 ## This is not a hypothetical
 
 I pointed it at the default palettes shipped by the major charting libraries.

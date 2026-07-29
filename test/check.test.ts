@@ -1,8 +1,14 @@
 import { describe, expect, it } from "vitest";
 import { checkPalette } from "../src/check.js";
 import { parsePalette, parsePaletteDetailed } from "../src/parse.js";
-import { PASS_FLOOR, FAIL_FLOOR, WONG } from "../src/thresholds.js";
-import { CONDITIONS } from "../src/vision.js";
+import {
+  PASS_FLOOR,
+  FAIL_FLOOR,
+  FAIL_RATIO,
+  WONG,
+  distance,
+} from "../src/thresholds.js";
+import { CONDITIONS, seenAs } from "../src/vision.js";
 
 /**
  * The two fixtures that define correctness for this tool. If either of these
@@ -41,6 +47,40 @@ describe("calibration", () => {
     // threshold wrong, and this test pins the reason down.
     expect(PASS_FLOOR.protanopia).toBeGreaterThan(PASS_FLOOR.tritanopia);
     expect(PASS_FLOOR.deuteranopia).toBeGreaterThan(PASS_FLOOR.tritanopia);
+  });
+});
+
+describe("FAIL_RATIO sensitivity", () => {
+  // The constant is a judgement call, so pin the window it has to sit inside.
+  // Measured across six palettes: below 0.75 the known-bad fixture stops
+  // failing entirely, which would make the tool useless; the reference palette
+  // stays clean all the way up to 0.90.
+  const countFails = (hexes: string[], ratio: number): number => {
+    let n = 0;
+    for (let i = 0; i < hexes.length; i++) {
+      for (let j = i + 1; j < hexes.length; j++) {
+        for (const c of CONDITIONS) {
+          const d = distance(seenAs(hexes[i], c), seenAs(hexes[j], c));
+          if (d < PASS_FLOOR[c] * ratio) n++;
+        }
+      }
+    }
+    return n;
+  };
+
+  const wong = WONG_NAMED.map((s) => s.hex);
+  const bad = RUDESYNC.map((s) => s.hex);
+
+  it("is set at the lenient edge of the usable window, not below it", () => {
+    expect(FAIL_RATIO).toBe(0.75);
+    expect(countFails(bad, 0.7)).toBe(0); // too lenient — known-bad escapes
+    expect(countFails(bad, FAIL_RATIO)).toBeGreaterThan(0);
+  });
+
+  it("keeps the reference palette clean across the whole window", () => {
+    for (const ratio of [0.75, 0.8, 0.85, 0.9]) {
+      expect(countFails(wong, ratio)).toBe(0);
+    }
   });
 });
 

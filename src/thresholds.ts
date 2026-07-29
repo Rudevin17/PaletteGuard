@@ -58,11 +58,17 @@ export const PASS_FLOOR: Record<Condition, number> = referenceFloors();
  * Below this fraction of the reference floor, two colours are not merely
  * "tighter than ideal" — they are genuinely hard to tell apart.
  *
- * 0.75 is a judgement call, and the only one in the tool. It is set here so it
- * is visible and arguable rather than buried: at this value the three known-bad
- * pairs in the test fixtures fail, and the reference palette itself passes every
- * condition by construction. Anything between roughly 0.7 and 0.8 behaves the
- * same way on the fixtures we have.
+ * This is the only judgement call in the tool, so it is kept visible and
+ * arguable rather than buried.
+ *
+ * **The usable window is 0.75–0.90**, measured across six palettes: below 0.75
+ * the known-bad fixture stops failing at all, and the reference palette holds at
+ * zero failures right across the range. 0.75 is therefore the *lenient* end of
+ * that window, not its middle — chosen deliberately, because erring toward
+ * fewer false positives makes a reported failure mean something, and because a
+ * threshold picked to maximise failures would deserve the scepticism it got.
+ *
+ * `sensitivity` in the test suite pins both edges so this cannot drift.
  */
 export const FAIL_RATIO = 0.75;
 

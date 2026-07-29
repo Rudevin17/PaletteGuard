@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="784" height="244"
+  viewBox="0 0 784 244" role="img"
+  aria-label="The same three-series chart shown twice: as normal vision sees it, and as a reader with protanopia does, where the Costs and Profit lines become nearly identical.">
+  <style>
+    text { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+    .ti { font-size: 13px; font-weight: 600; fill: #111827; }
+    .su { font-size: 10px; fill: #6b7280; }
+    .lg { font-size: 10px; fill: #374151; }
+    .grid { stroke: #e5e7eb; stroke-width: 1; }
+    .cap { font-size: 11px; fill: #374151; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      .ti { fill: #f3f4f6; } .su, .mono { fill: #9ca3af; }
+      .lg, .cap { fill: #d1d5db; } .grid { stroke: #374151; }
+    }
+  </style>
+  <g>
+      <text x="34" y="18" class="ti">Normal vision</text>
+      <text x="34" y="31" class="su">d3 schemeCategory10 — the default</text>
+      <line x1="34" y1="182" x2="366" y2="182" class="grid"/><line x1="34" y1="146" x2="366" y2="146" class="grid"/><line x1="34" y1="110" x2="366" y2="110" class="grid"/><line x1="34" y1="74" x2="366" y2="74" class="grid"/><line x1="34" y1="38" x2="366" y2="38" class="grid"/>
+      <path d="M34,121.52000000000001 L100.4,98.48 L166.8,79.76 L233.20000000000002,88.39999999999999 L299.6,61.040000000000006 L366,43.75999999999999" fill="none" stroke="#1f77b4" stroke-width="2.6"
+      stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M34,127.28 L100.4,108.56 L166.8,91.28 L233.20000000000002,95.60000000000001 L299.6,75.44 L366,63.92" fill="none" stroke="#ff7f0e" stroke-width="2.6"
+      stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M34,138.8 L100.4,118.64 L166.8,102.8 L233.20000000000002,111.44 L299.6,84.08 L366,68.24" fill="none" stroke="#2ca02c" stroke-width="2.6"
+      stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="34" cy="121.52000000000001" r="2.6" fill="#1f77b4"/><circle cx="100.4" cy="98.48" r="2.6" fill="#1f77b4"/><circle cx="166.8" cy="79.76" r="2.6" fill="#1f77b4"/><circle cx="233.20000000000002" cy="88.39999999999999" r="2.6" fill="#1f77b4"/><circle cx="299.6" cy="61.040000000000006" r="2.6" fill="#1f77b4"/><circle cx="366" cy="43.75999999999999" r="2.6" fill="#1f77b4"/><circle cx="34" cy="127.28" r="2.6" fill="#ff7f0e"/><circle cx="100.4" cy="108.56" r="2.6" fill="#ff7f0e"/><circle cx="166.8" cy="91.28" r="2.6" fill="#ff7f0e"/><circle cx="233.20000000000002" cy="95.60000000000001" r="2.6" fill="#ff7f0e"/><circle cx="299.6" cy="75.44" r="2.6" fill="#ff7f0e"/><circle cx="366" cy="63.92" r="2.6" fill="#ff7f0e"/><circle cx="34" cy="138.8" r="2.6" fill="#2ca02c"/><circle cx="100.4" cy="118.64" r="2.6" fill="#2ca02c"/><circle cx="166.8" cy="102.8" r="2.6" fill="#2ca02c"/><circle cx="233.20000000000002" cy="111.44" r="2.6" fill="#2ca02c"/><circle cx="299.6" cy="84.08" r="2.6" fill="#2ca02c"/><circle cx="366" cy="68.24" r="2.6" fill="#2ca02c"/>
+      <rect x="34" y="196" width="9" height="9" rx="2" fill="#1f77b4"/>
+      <text x="48" y="204" class="lg">Revenue</text>
+      <rect x="126" y="196" width="9" height="9" rx="2" fill="#ff7f0e"/>
+      <text x="140" y="204" class="lg">Costs</text>
+      <rect x="218" y="196" width="9" height="9" rx="2" fill="#2ca02c"/>
+      <text x="232" y="204" class="lg">Profit</text>
+    </g>
+  <g transform="translate(404,0)">
+    <g>
+      <text x="34" y="18" class="ti">Protanopia</text>
+      <text x="34" y="31" class="su">the same chart, ~1 in 12 men</text>
+      <line x1="34" y1="182" x2="366" y2="182" class="grid"/><line x1="34" y1="146" x2="366" y2="146" class="grid"/><line x1="34" y1="110" x2="366" y2="110" class="grid"/><line x1="34" y1="74" x2="366" y2="74" class="grid"/><line x1="34" y1="38" x2="366" y2="38" class="grid"/>
+      <path d="M34,121.52000000000001 L100.4,98.48 L166.8,79.76 L233.20000000000002,88.39999999999999 L299.6,61.040000000000006 L366,43.75999999999999" fill="none" stroke="#6868b4" stroke-width="2.6"
+      stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M34,127.28 L100.4,108.56 L166.8,91.28 L233.20000000000002,95.60000000000001 L299.6,75.44 L366,63.92" fill="none" stroke="#95950d" stroke-width="2.6"
+      stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M34,138.8 L100.4,118.64 L166.8,102.8 L233.20000000000002,111.44 L299.6,84.08 L366,68.24" fill="none" stroke="#8c8c2d" stroke-width="2.6"
+      stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="34" cy="121.52000000000001" r="2.6" fill="#6868b4"/><circle cx="100.4" cy="98.48" r="2.6" fill="#6868b4"/><circle cx="166.8" cy="79.76" r="2.6" fill="#6868b4"/><circle cx="233.20000000000002" cy="88.39999999999999" r="2.6" fill="#6868b4"/><circle cx="299.6" cy="61.040000000000006" r="2.6" fill="#6868b4"/><circle cx="366" cy="43.75999999999999" r="2.6" fill="#6868b4"/><circle cx="34" cy="127.28" r="2.6" fill="#95950d"/><circle cx="100.4" cy="108.56" r="2.6" fill="#95950d"/><circle cx="166.8" cy="91.28" r="2.6" fill="#95950d"/><circle cx="233.20000000000002" cy="95.60000000000001" r="2.6" fill="#95950d"/><circle cx="299.6" cy="75.44" r="2.6" fill="#95950d"/><circle cx="366" cy="63.92" r="2.6" fill="#95950d"/><circle cx="34" cy="138.8" r="2.6" fill="#8c8c2d"/><circle cx="100.4" cy="118.64" r="2.6" fill="#8c8c2d"/><circle cx="166.8" cy="102.8" r="2.6" fill="#8c8c2d"/><circle cx="233.20000000000002" cy="111.44" r="2.6" fill="#8c8c2d"/><circle cx="299.6" cy="84.08" r="2.6" fill="#8c8c2d"/><circle cx="366" cy="68.24" r="2.6" fill="#8c8c2d"/>
+      <rect x="34" y="196" width="9" height="9" rx="2" fill="#6868b4"/>
+      <text x="48" y="204" class="lg">Revenue</text>
+      <rect x="126" y="196" width="9" height="9" rx="2" fill="#95950d"/>
+      <text x="140" y="204" class="lg">Costs</text>
+      <rect x="218" y="196" width="9" height="9" rx="2" fill="#8c8c2d"/>
+      <text x="232" y="204" class="lg">Profit</text>
+    </g>
+  </g>
+  <text x="0" y="238" class="cap">
+    Costs and Profit measure ΔE 4.69 apart under protanopia — 13.38 is needed. Three series is enough.
+  </text>
+</svg>
