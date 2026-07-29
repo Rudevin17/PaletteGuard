@@ -18,12 +18,12 @@
   "author": "Rodvin Cosejo",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Rudevin17/paletteguard.git"
+    "url": "git+https://github.com/Rudevin17/PaletteGuard.git"
   },
   "bugs": {
-    "url": "https://github.com/Rudevin17/paletteguard/issues"
+    "url": "https://github.com/Rudevin17/PaletteGuard/issues"
   },
-  "homepage": "https://github.com/Rudevin17/paletteguard#readme",
+  "homepage": "https://github.com/Rudevin17/PaletteGuard#readme",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
