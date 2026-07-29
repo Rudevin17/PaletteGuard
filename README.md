@@ -378,4 +378,4 @@ boundaries are written down.
 
 ## Licence
 
-MIT © Rudevin Cosejo
+MIT © Rodvin Cosejo
